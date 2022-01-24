@@ -7,19 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class StockDetail extends Model
 {
+    public static $details;
     use HasFactory;
     
     
-   public static function detailsSave($itemValue){
-            $this->details = new StockDetail();
-            $this->details->stockId     = $this->stock->id;
-            $this->details->supplierId    = $itemValue['supplier'];
-            $this->details->productId     = $itemValue['product'];
-            $this->details->sizeId        = $itemValue['size'];
-            $this->details->colorId       = $itemValue['color'];
-            $this->details->unitPrice   = $itemValue['unitPrice'];
-            $this->details->stockAmount = $itemValue['stockAmount'];
-            $this->details->save();
+   public static function detailsSave($itemValue,$stockId){
+            self::$details = new StockDetail();
+            self::$details->stockId       = $stockId;
+            self::$details->supplierId    = $itemValue['supplier'];
+            self::$details->productId     = $itemValue['product'];
+            self::$details->sizeId        = $itemValue['size'];
+            self::$details->colorId       = $itemValue['color'];
+            self::$details->unitPrice     = $itemValue['unitPrice'];
+            self::$details->stockAmount   = $itemValue['stockAmount'];
+            self::$details->save();
     }
 
 

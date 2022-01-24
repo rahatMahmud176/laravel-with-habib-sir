@@ -96,7 +96,7 @@ class StockController extends Controller
         $this->stock->save();
         
         foreach ($this->resultArray as $itemValue) {
-            StockDetail::detailsSave($itemValue);
+            StockDetail::detailsSave($itemValue,$this->stock->id);
         }
         
         Alert::success('successfull!','Stock Save successfully!');

@@ -22,11 +22,9 @@ class ApiController extends Controller
     private $productImages; 
     private $productDetails; 
     private $stockIn; 
-    private $stockOut; 
-    private $colorsId = []; 
-    private $colorsName = []; 
-    private $sizesId = []; 
-    private $sizesName = []; 
+    private $stockOut;  
+    private $colorArray = [];  
+    private $sizeArray = []; 
     private $tempOut; 
     
             
@@ -102,28 +100,23 @@ class ApiController extends Controller
          }
          
          if ($this->stockIn > $this->stockOut) {
-             foreach ($this->productDetails as $productDetail) {
+             foreach ($this->productDetails as $productDetail) { 
                  
-                array_push($this->colorsId, $productDetail->colorId); 
-                array_push($this->colorsName, $productDetail->color->title); 
-                
-                array_push($this->sizesId, $productDetail->sizeId);
-                array_push($this->sizesName, $productDetail->size->title);
+                array_push($this->colorArray, $productDetail->color);  
+                array_push($this->sizeArray, $productDetail->size);
              }
          }
          
          $this->result = [
              'id'                => $this->product->id,
              'title'             => $this->product->title,
+             'image'             => $this->product->featuredImage,
              'regularPrice'      => $this->product->regularPrice,
              'sellingPrice'      => $this->product->sellingPrice,
-             'shortDescription'  => $this->product->shortDescription,
-             'colorsId'          => array_unique($this->colorsId),
-             'colorTitle'        => array_unique($this->colorsName),
-             'sizesId'           => array_unique($this->sizesId),
-             'sizesTitle'        => array_unique($this->sizesName),
-             'category'          => $this->product->category->categoryTitle,
-             'categoryId'        => $this->product->category->id,
+             'shortDescription'  => $this->product->shortDescription, 
+             'color'             => array_unique($this->colorArray), 
+             'size'              => array_unique($this->sizeArray),
+             'category'          => $this->product->category, 
              'stockStatus'       => $this->productStockStatus($id),
          ];
          
