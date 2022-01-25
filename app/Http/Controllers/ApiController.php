@@ -110,7 +110,7 @@ class ApiController extends Controller
          $this->result = [
              'id'                => $this->product->id,
              'title'             => $this->product->title,
-             'image'             => $this->product->featuredImage,
+             'image'             => asset($this->product->featuredImage),
              'regularPrice'      => $this->product->regularPrice,
              'sellingPrice'      => $this->product->sellingPrice,
              'shortDescription'  => $this->product->shortDescription, 
