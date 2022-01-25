@@ -102,7 +102,7 @@ class StockController extends Controller
         Alert::success('successfull!','Stock Save successfully!');
         return redirect()->back();
         
-        //solved my problem this is
+        //solved my problem this is okey form linux
     }
 
 
